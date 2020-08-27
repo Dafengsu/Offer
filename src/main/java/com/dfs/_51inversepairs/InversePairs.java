@@ -3,15 +3,15 @@ package com.dfs._51inversepairs;
 import java.util.Arrays;
 
 /**
- * @description:    面试题51:数组中的逆序对
- * @author: Dafengsu
- * @date: 2019/8/19
+ * @description    面试题51:数组中的逆序对
+ * @author Dafengsu
+ * @date 2019/8/19
  */
 public class InversePairs {
     /**
      * 数据范围有限
-     * @param array
-     * @return
+     * @param array 数组
+     * @return 逆序对数
      */
     public int InversePairs(int [] array) {
         if (array == null || array.length == 0) {
@@ -45,21 +45,21 @@ public class InversePairs {
         if (array == null || array.length == 0) {
             return 0;
         }
-        return mergerSortCore(array, 0, array.length - 1, new int[array.length]);
+        return mergeSortCore(array, 0, array.length - 1, new int[array.length]);
 
     }
 
-    private int mergerSortCore(int[] array, int start, int end, int[] temp) {
+    private int mergeSortCore(int[] array, int start, int end, int[] temp) {
         if (start == end) {
             return 0;
         }
         int mid = (end - start) / 2 + start;
-        int left = mergerSortCore(array, start, mid, temp);
-        int right = mergerSortCore(array, mid + 1, end, temp);
-        int count = mergerSortMerge(array, start, mid, end, temp);
+        int left = mergeSortCore(array, start, mid, temp);
+        int right = mergeSortCore(array, mid + 1, end, temp);
+        int count = mergeSortMerge(array, start, mid, end, temp);
         return (left + right + count)%1000000007;
     }
-    private int mergerSortMerge(int[] array, int start, int mid, int end, int[] temp) {
+    private int mergeSortMerge(int[] array, int start, int mid, int end, int[] temp) {
         System.arraycopy(array, start, temp, 0, end - start + 1);
         int left = 0;
         int right = mid - start + 1;
